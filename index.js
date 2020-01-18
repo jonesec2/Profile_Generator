@@ -4,6 +4,73 @@ const util = require("util")
 const puppeteer = require('puppeteer')
 const fs = require("fs-extra");
 
+function userPrompts() {
+    return inquirer.prompt([
+        {
+            message: "Enter your GitHub username",
+            name: "username"
+        },
+        {
+            message: "Pick your favorite color",
+            name: "color"
+        }
+    ])
+}
+
+async function htmlVariables() {
+    try {
+        //passing in userInput from earlier function
+        const userInput = await userPrompts();
+        console.log(userInput.username)
+
+        // creating next paramter for html with axios to get gitHub info
+        const gitHub = await axios.get(`https://api.github.com/users/${userInput.username}`)
+            .catch(function (error) {
+                console.log(error)
+            });
+
+        // creating last paramter for html with axios to get gitHub stars info
+        const starsTotal = await axios.get(`https://api.github.com/users/${userInput.username}/repos?per_page=100000`)
+            .then(function (res) {
+                const stars = res.data.map(repo => repo.stargazers_count);
+                const starsTotal = stars.reduce((total, num) => total + num);
+                return starsTotal;
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+
+        //declare variables for HTML
+        const html = createHTML(gitHub, starsTotal, userInput);
+
+        //create html file to house for pdf
+        await createFile(`${userInput.username}.html`, html);
+        console.log(`Successfully wrote for ${userInput.username}.html`);
+        
+        // start puppeteer functionality
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        //grabs html to create pdf
+        await page.setContent(html)
+        await page.emulateMedia('screen');
+        await page.pdf({
+            path: 'gitHubProfile.pdf',
+            format: 'A4',
+            printBackground: true
+        });
+
+        //closes down puppeteer function
+        await browser.close();
+        process.exit();
+
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+htmlVariables()
+
 const createFile = util.promisify(fs.writeFile);
 
 function createHTML(gitHub, starsTotal, userInput) {
@@ -45,65 +112,3 @@ function createHTML(gitHub, starsTotal, userInput) {
 </html>
 `
 }
-
-function userPrompts() {
-    return inquirer.prompt([
-        {
-            message: "Enter your GitHub username",
-            name: "username"
-        },
-        {
-            message: "Pick your favorite color",
-            name: "color"
-        }
-    ])
-}
-
-async function htmlVariables() {
-    try {
-        //passing in userInput from earlier function
-        const userInput = await userPrompts();
-        console.log(userInput.username)
-
-        // creating next paramter for html with axios to get gitHub info
-        const gitHub = await axios.get(`https://api.github.com/users/${userInput.username}`)
-            .catch(function (error) {
-                console.log(error)
-            });
-
-        // creating last paramter for html with axios to get gitHub stars info
-        const starsTotal = await axios.get(`https://api.github.com/users/${userInput.username}/repos?per_page=100000`)
-            .then(function (res) {
-                const stars = res.data.map(repo => repo.stargazers_count);
-                const starsTotal = stars.reduce((total, num) => total + num);
-                return starsTotal;
-            })
-            .catch(function (error) {
-                console.log(error)
-            });
-
-        const html = createHTML(gitHub, starsTotal, userInput);
-
-        await createFile(`${userInput.username}.html`, html);
-        console.log(`Successfully wrote for ${userInput.username}.html`);
-
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-
-        await page.setContent(html)
-        await page.emulateMedia('screen');
-        await page.pdf({
-            path: 'gitHubProfile.pdf',
-            format: 'A4',
-            printBackground: true
-        });
-        
-        await browser.close();
-        process.exit();
-
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-htmlVariables()
