@@ -4,7 +4,7 @@ const util = require("util")
 const puppeteer = require('puppeteer')
 const fs = require("fs-extra");
 
-const writeFileAsync = util.promisify(fs.writeFile);
+const createFile = util.promisify(fs.writeFile);
 
 function createHTML(gitHub, starsTotal, userInput) {
     return `
@@ -62,7 +62,7 @@ function userPrompts() {
 async function init() {
     try {
         //passing in userInput from earlier function
-        const userInput = await promptUser();
+        const userInput = await userPrompts ();
         console.log(userInput.username)
 
         // creating next paramter for html with axios to get gitHub info
@@ -79,7 +79,7 @@ async function init() {
 
         const html = createHTML(gitHub, starsTotal, userInput);
 
-        await writeFileAsync(`profile_${userInput.username}.html`, html);
+        await createFile(`profile_${userInput.username}.html`, html);
         console.log(`Successfully wrote for ${userInput.username}.html`);
 
         const browser = await puppeteer.launch();
