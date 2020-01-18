@@ -35,7 +35,7 @@ function createHTML(gitHub, starsTotal, userInput) {
         <hr>
         <div class="bio" style="text-align: center;">${gitHub.data.bio}</div>
         <br>
-        <div class="body" style="background-color: ${userInput.data.color};">
+        <div class="body" style="background-color: ${userInput.color};">
             <div>${starsTotal}</div>
             <div></div>
         </div>
@@ -62,7 +62,7 @@ function userPrompts() {
 async function init() {
     try {
         //passing in userInput from earlier function
-        const userInput = await userPrompts ();
+        const userInput = await userPrompts();
         console.log(userInput.username)
 
         // creating next paramter for html with axios to get gitHub info
@@ -73,6 +73,11 @@ async function init() {
 
         // creating last paramter for html with axios to get gitHub stars info
         const starsTotal = await axios.get(`https://api.github.com/users/${userInput.username}/repos?per_page=100000`)
+            .then(function (res) {
+                const stars = res.data.map(repo => repo.stargazers_count);
+                const starsTotal = stars.reduce((total, num) => total + num);
+                return starsTotal;
+            })
             .catch(function (error) {
                 console.log(error)
             });
