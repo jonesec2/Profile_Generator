@@ -26,6 +26,6 @@
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.3",
     "pdf-puppeteer": "^1.1.9",
-    "until": "^0.1.1"
+    "util": "^0.12.1"
   }
 }

@@ -53,7 +53,7 @@ const displayName = /*html*/ `
 
         console.log(displayName);
         await browser.close();
-        process.exist
+        process.exit();
 
 
     } catch (e) {
