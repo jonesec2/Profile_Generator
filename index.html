@@ -6,7 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style></style>
+    <style>
+        /* body {
+            background-color: blueviolet;
+        } */
+        h1, h3, h5 {
+            color: black;
+            -webkit-text-stroke: 0.2px gray;
+        }
+        .grid-container {
+          display: grid;
+          grid-column-gap: 50px;
+          grid-row-gap: 20px;
+          grid-template-columns: auto auto;
+          background-color: ${useInput.color};
+          padding: 10px;
+        }
+        
+        .grid-item {
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          padding: 30px;
+          font-size: 20px;
+          text-align: center;
+        }
+        </style>
 </head>
 
 <body>
@@ -26,8 +50,24 @@
     <div class="bio" style="text-align: center;">${bio}</div>
     <br>
     <div class="body" style="background-color: ${color};">
-        <div></div>
-        <div></div>
+        <div class="grid-container">
+            <div class="grid-item">
+                <h5 style="text-align:center;">Public Repositories</h5>
+                <p style="text-align:center;"> ${gitHub.data.public_repos} </p>
+            </div>
+            <div class="grid-item">
+                <h5 style="text-align:center;">Followers</h5>
+                <p style="text-align:center;"> ${gitHub.data.followers} </p>
+            </div>  
+            <div class="grid-item">
+                <h5 style="text-align:center;">gitHub Stars</h5>
+                <p style="text-align:center;"> ${starsTotal}</p>
+            </div>  
+            <div class="grid-item">
+                <h5 style="text-align:center;">Following</h5>
+                <p style="text-align:center;"> ${gitHub.data.following} </p>
+            </div>  
+          </div>
     </div>
 
 
