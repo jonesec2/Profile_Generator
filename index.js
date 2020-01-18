@@ -59,38 +59,64 @@ function userPrompts() {
     ])
 }
 
+async function init() {
+    try {
+        //passing in userInput from earlier function
+        const userInput = await promptUser();
+        console.log(userInput.username)
 
-
-        axios.get(`https://api.github.com/users/${username}`)
+        // creating next paramter for html with axios to get gitHub info
+        const gitHub = await axios.get(`https://api.github.com/users/${userInput.username}`)
             .then(function (res) {
-                xx
-
-                const picture = res.data.avatar_url;
-                const name = res.data.name;
-                const location = res.data.location;
-                const gitHub = res.data.html_url;
-                const blog = res.data.blog;
-                const bio = res.data.bio;
-                const repoNumber = res.data.public_repos;
-                const followers = res.data.followers;
-                const following = res.data.following;
-
-                axios.get(`https://api.github.com/users/${username}/repos?per_page=100000`)
-                    .then(function (res) {
-
-                        // gets the number of stars for each repo
-                        // condenses the array into a single total of stars
-                        const stars = res.data.map(repo => repo.stargazers_count);
-                        const starsTotal = stars.reduce((total, num) => total + num);
-                        console.log(starsTotal)
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                console.log(res)
 
             })
+            .catch(function (error) {
+                console.log(error)
+            });
+
+        // creating last paramter for html with axios to get gitHub stars info
+        const starsTotal = await axios.get(`https://api.github.com/users/${userInput.username}/repos?per_page=100000`)
+            .then(function (res) {
+                console.log(res)
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+
+    }
+}
+init()
+
+axios.get(`https://api.github.com/users/${username}`)
+    .then(function (res) {
+
+        const picture = res.data.avatar_url;
+        const name = res.data.name;
+        const location = res.data.location;
+        const gitHub = res.data.html_url;
+        const blog = res.data.blog;
+        const bio = res.data.bio;
+        const repoNumber = res.data.public_repos;
+        const followers = res.data.followers;
+        const following = res.data.following;
+
+        axios.get(`https://api.github.com/users/${username}/repos?per_page=100000`)
+            .then(function (res) {
+
+                // gets the number of stars for each repo
+                // condenses the array into a single total of stars
+                const stars = res.data.map(repo => repo.stargazers_count);
+                const starsTotal = stars.reduce((total, num) => total + num);
+                console.log(starsTotal)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
     })
-    .catch(function (error) {
-        console.log(error)
-    });
+
+    })
+    .catch (function (error) {
+    console.log(error)
+});
