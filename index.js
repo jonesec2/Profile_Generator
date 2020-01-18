@@ -59,7 +59,7 @@ function userPrompts() {
     ])
 }
 
-async function init() {
+async function htmlVariables() {
     try {
         //passing in userInput from earlier function
         const userInput = await userPrompts();
@@ -98,7 +98,7 @@ async function init() {
             printBackground: true
         });
 
-        console.log(`Created pdf for ${userInput.username}.pdf`);
+        console.log(`Created pdf for ${userInput.username}`);
         await browser.close();
         process.exit();
 
@@ -107,4 +107,4 @@ async function init() {
         console.log(err)
     }
 }
-init()
+htmlVariables()
