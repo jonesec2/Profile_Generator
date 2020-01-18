@@ -4,9 +4,9 @@ This creates a user profile in PDF form by answering only two questions. What is
 
 
 ## How to use
-![Demo] (profile_generator_demo.gif)
+<img src="profile_generator_demo.gif">
 
-## What is in the PDF Profile?
+## What is in the PDF Profile?s
 The PDF will be populated with the following:
 
 * Profile image
