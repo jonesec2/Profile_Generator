@@ -44,8 +44,7 @@ async function htmlVariables() {
 
         //create html file to house for pdf
         await createFile(`${userInput.username}.html`, html);
-        console.log(`Successfully created ${userInput.username}.html`);
-        
+
         // start puppeteer functionality
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
@@ -82,13 +81,43 @@ function createHTML(gitHub, starsTotal, userInput) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-        <style></style>
+        <style>
+        h1, h3, h5 {
+            color: black;
+            -webkit-text-stroke: 0.2px gray;
+        }
+        .grid-container {
+          display: grid;
+          grid-column-gap: 20px;
+          grid-row-gap: 20px;
+          grid-template-columns: auto auto;
+          background-color: ${userInput.color};
+          padding: 10px;
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        img {
+            border-radius: 50%;
+            height: 100px;
+            width: 400px;
+        }
+        .grid-item {
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          padding: 30px;
+          font-size: 20px;
+          text-align: center;
+        }
+        </style>
     </head>
 
     <body>
         <header class="header" style="background-color:${userInput.color};">
-            <img src="paris.jpg" alt="Paris" class="center">
-            <img src="${gitHub.data.avatar_url}" style="center">
+            <img src="${gitHub.data.avatar_url}" class="center">
             <h1 style="text-align:center;">Centered Heading</h1>
             <h3 style="text-align:center;">My name is ${gitHub.data.name}</h3>
             <p style="text-align:center;">
@@ -101,13 +130,27 @@ function createHTML(gitHub, starsTotal, userInput) {
         <hr>
         <div class="bio" style="text-align: center;">${gitHub.data.bio}</div>
         <br>
-        <div class="body" style="background-color: ${userInput.color};">
-            <div>${starsTotal}</div>
-            <div></div>
+        <div class="body" style="background-color:${userInput.color};">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h5 style="text-align:center;">Public Repositories</h5>
+                    <p style="text-align:center;"> ${gitHub.data.public_repos} </p>
+                </div>
+                <div class="grid-item">
+                    <h5 style="text-align:center;">Followers</h5>
+                    <p style="text-align:center;"> ${gitHub.data.followers} </p>
+                </div>  
+                <div class="grid-item">
+                    <h5 style="text-align:center;">gitHub Stars</h5>
+                    <p style="text-align:center;"> ${starsTotal}</p>
+                </div>  
+                <div class="grid-item">
+                    <h5 style="text-align:center;">Following</h5>
+                    <p style="text-align:center;"> ${gitHub.data.following} </p>
+                </div>  
+            </div>
         </div>
-
     </body>
-
-</html>
-`
+    </html>
+    `
 }
