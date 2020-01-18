@@ -59,6 +59,7 @@ async function htmlVariables() {
         });
 
         //closes down puppeteer function
+        console.log("Done!")
         await browser.close();
         process.exit();
 
