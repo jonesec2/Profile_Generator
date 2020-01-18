@@ -8,55 +8,60 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         <style>
+        body {
+            background-color:blue
+        }
         h1, h3, h5 {
             color: black;
             -webkit-text-stroke: 0.2px gray;
         }
         .grid-container {
           display: grid;
-          grid-column-gap: 20px;
-          grid-row-gap: 20px;
+          grid-column-gap: 30px;
+          grid-row-gap: 30px;
           grid-template-columns: auto auto;
-          background-color: red;
-          padding: 10px;
-        }
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
+          background-color: blue;
+          padding: 20px;
         }
         img {
             border-radius: 50%;
-            height: 100px;
-            width: 400px;
+            height: 200px;
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .grid-item {
           background-color: rgba(255, 255, 255, 0.8);
           border: 1px solid rgba(0, 0, 0, 0.8);
-          padding: 30px;
+          padding: 20px;
           font-size: 20px;
           text-align: center;
         }
+        a:link {
+            color: black;
+          }
         </style>
     </head>
 
     <body>
-        <header class="header" style="background-color:red;">
+        <header class="header" style="background-color:blue;">
             <img src="https://avatars1.githubusercontent.com/u/55710293?v=4" class="center">
-            <h1 style="text-align:center;">Centered Heading</h1>
-            <h3 style="text-align:center;">My name is Christian Jones</h3>
-            <p style="text-align:center;">
-                <a href="https://www.google.com/maps/place/Richmond,%20Virginia"
-                    class='location fa-fal-icon'>Richmond Virginia</a>
-                <a href='https://github.com/jonesec2'>gitHub</a>
-                <a href="https://jonesec2.github.io/christian-jones-portfolio/" class='location fa-fal-icon'>Blog</a>
-            </p>
+            <div style="background-color:rgba(255, 255, 255, 0.8);">
+                <h1 style="text-align:center;">Welcome to my profile</h1>
+                <h3 style="text-align:center;">My name is Christian Jones</h3>
+                <p style="text-align:center;">
+                    <a href="https://www.google.com/maps/place/Richmond,%20Virginia"
+                        class='location fa-fal-icon'>Richmond Virginia</a>
+                    <a href='https://github.com/jonesec2'>gitHub</a>
+                    <a href="https://jonesec2.github.io/christian-jones-portfolio/" class='location fa-fal-icon'>Blog</a>
+                </p>
+            </div>
         </header>
-        <hr>
-        <div class="bio" style="text-align: center;">Experienced Software Quality Analyst ready to transition from testing to developer. Studying at the University of Richmond Coding Bootcamp.</div>
         <br>
-        <div class="body" style="background-color:red;">
+        <div class="bio" style="text-align: center; background-color:rgba(255, 255, 255, 0.8);">Experienced Software Quality Analyst ready to transition from testing to developer. Studying at the University of Richmond Coding Bootcamp.</div>
+        <br>
+        <div class="body" style="background-color:blue;">
             <div class="grid-container">
                 <div class="grid-item">
                     <h5 style="text-align:center;">Public Repositories</h5>

@@ -82,53 +82,57 @@ function createHTML(gitHub, starsTotal, userInput) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         <style>
+        body {
+            background-color:${userInput.color}
+        }
         h1, h3, h5 {
             color: black;
-            -webkit-text-stroke: 0.2px gray;
         }
         .grid-container {
           display: grid;
-          grid-column-gap: 20px;
-          grid-row-gap: 20px;
+          grid-column-gap: 30px;
+          grid-row-gap: 30px;
           grid-template-columns: auto auto;
           background-color: ${userInput.color};
-          padding: 10px;
-        }
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
+          padding: 20px;
         }
         img {
             border-radius: 50%;
-            height: 100px;
-            width: 400px;
+            height: 200px;
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .grid-item {
           background-color: rgba(255, 255, 255, 0.8);
           border: 1px solid rgba(0, 0, 0, 0.8);
-          padding: 30px;
+          padding: 20px;
           font-size: 20px;
           text-align: center;
         }
+        a:link {
+            color: black;
+          }
         </style>
     </head>
 
     <body>
         <header class="header" style="background-color:${userInput.color};">
             <img src="${gitHub.data.avatar_url}" class="center">
-            <h1 style="text-align:center;">Centered Heading</h1>
-            <h3 style="text-align:center;">My name is ${gitHub.data.name}</h3>
-            <p style="text-align:center;">
-                <a href="https://www.google.com/maps/place/${gitHub.data.location.split(' ').join(',%20')}"
-                    class='location fa-fal-icon'>${gitHub.data.location}</a>
-                <a href='${gitHub.data.html_url}'>gitHub</a>
-                <a href="${gitHub.data.blog}" class='location fa-fal-icon'>Blog</a>
-            </p>
+            <div style="background-color:rgba(255, 255, 255, 0.8);">
+                <h1 style="text-align:center;">Welcome to my profile</h1>
+                <h3 style="text-align:center;">My name is ${gitHub.data.name}</h3>
+                <p style="text-align:center;">
+                    <a href="https://www.google.com/maps/place/${gitHub.data.location.split(' ').join(',%20')}"
+                        class='location fa-fal-icon'>${gitHub.data.location}</a>
+                    <a href='${gitHub.data.html_url}'>gitHub</a>
+                    <a href="${gitHub.data.blog}" class='location fa-fal-icon'>Blog</a>
+                </p>
+            </div>
         </header>
-        <hr>
-        <div class="bio" style="text-align: center;">${gitHub.data.bio}</div>
+        <br>
+        <div class="bio" style="text-align: center; background-color:rgba(255, 255, 255, 0.8);">${gitHub.data.bio}</div>
         <br>
         <div class="body" style="background-color:${userInput.color};">
             <div class="grid-container">

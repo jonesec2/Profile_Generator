@@ -13,27 +13,33 @@
         }
         .grid-container {
           display: grid;
-          grid-column-gap: 50px;
+          grid-column-gap: 20px;
           grid-row-gap: 20px;
           grid-template-columns: auto auto;
-          background-color: ${useInput.color};
+          background-color: ${userInput.color};
           padding: 10px;
         }
-        
+        img {
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .grid-item {
           background-color: rgba(255, 255, 255, 0.8);
           border: 1px solid rgba(0, 0, 0, 0.8);
           padding: 30px;
           font-size: 20px;
           text-align: center;
-        }
         </style>
 </head>
 
 <body>
     <header class="header" style="background-color:${color};">
         <img src="paris.jpg" alt="Paris" class="center">
-        <img src="${picture}" style="center">
+        <img src="https://avatars1.githubusercontent.com/u/55710293?v=4" style="center">
         <h1 style="text-align:center;">Centered Heading</h1>
         <h3 style="text-align:center;">My name is ${Name}</h3>
         <p style="text-align:center;">
