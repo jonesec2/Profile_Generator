@@ -4,8 +4,7 @@ This creates a user profile in PDF form by answering only two questions. What is
 
 
 ## How to use
-[gif placeholder]
-
+![Demo] (profile_generator_demo.gif)
 
 ## What is in the PDF Profile?
 The PDF will be populated with the following:
