@@ -21,7 +21,6 @@ async function htmlVariables() {
     try {
         //passing in userInput from earlier function
         const userInput = await userPrompts();
-        console.log(userInput.username)
 
         // creating next paramter for html with axios to get gitHub info
         const gitHub = await axios.get(`https://api.github.com/users/${userInput.username}`)
@@ -45,7 +44,7 @@ async function htmlVariables() {
 
         //create html file to house for pdf
         await createFile(`${userInput.username}.html`, html);
-        console.log(`Successfully wrote for ${userInput.username}.html`);
+        console.log(`Successfully created ${userInput.username}.html`);
         
         // start puppeteer functionality
         const browser = await puppeteer.launch();
