@@ -84,7 +84,7 @@ async function htmlVariables() {
 
         const html = createHTML(gitHub, starsTotal, userInput);
 
-        await createFile(`profile_${userInput.username}.html`, html);
+        await createFile(`${userInput.username}.html`, html);
         console.log(`Successfully wrote for ${userInput.username}.html`);
 
         const browser = await puppeteer.launch();
@@ -97,8 +97,7 @@ async function htmlVariables() {
             format: 'A4',
             printBackground: true
         });
-
-        console.log(`Created pdf for ${userInput.username}`);
+        
         await browser.close();
         process.exit();
 
