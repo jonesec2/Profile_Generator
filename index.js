@@ -4,9 +4,9 @@ const until = require("until")
 const puppeteer = require('puppeteer')
 const fs = require("fs-extra");
 
- const createFile = until.promisify(fs.file);
+const createFile = until.promisify(fs.file);
 
-function createHTML(gitHub, starsTotal) {
+function createHTML(gitHub, starsTotal, userInput) {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -20,27 +20,25 @@ function createHTML(gitHub, starsTotal) {
     </head>
 
     <body>
-        <header class="header" style="background-color:${color};">
+        <header class="header" style="background-color:${userInput.color};">
             <img src="paris.jpg" alt="Paris" class="center">
-            <img src="${picture}" style="center">
+            <img src="${gitHub.data.avatar_url}" style="center">
             <h1 style="text-align:center;">Centered Heading</h1>
-            <h3 style="text-align:center;">My name is ${Name}</h3>
+            <h3 style="text-align:center;">My name is ${gitHub.data.name}</h3>
             <p style="text-align:center;">
-                <a href="https://www.google.com/maps/place/${location.split(' ').join(',%20')}"
-                    class='location fa-fal-icon'>${location}</a>
-                <a href='${github}'>gitHub</a>
-                <a href="${blog}" class='location fa-fal-icon'>Blog</a>
+                <a href="https://www.google.com/maps/place/${gitHub.data.location.split(' ').join(',%20')}"
+                    class='location fa-fal-icon'>${gitHub.data.location}</a>
+                <a href='${gitHub.data.html_url}'>gitHub</a>
+                <a href="${gitHub.data.blog}" class='location fa-fal-icon'>Blog</a>
             </p>
         </header>
         <hr>
-        <div class="bio" style="text-align: center;">${bio}</div>
+        <div class="bio" style="text-align: center;">${gitHub.data.bio}</div>
         <br>
-        <div class="body" style="background-color: ${color};">
-            <div></div>
+        <div class="body" style="background-color: ${userInput.data.color};">
+            <div>${starsTotal}</div>
             <div></div>
         </div>
-
-
 
     </body>
 
@@ -48,8 +46,8 @@ function createHTML(gitHub, starsTotal) {
 `
 }
 
-inquirer
-    .prompt([
+function userPrompts() {
+    return inquirer.prompt([
         {
             message: "Enter your GitHub username",
             name: "username"
@@ -59,11 +57,13 @@ inquirer
             name: "color"
         }
     ])
+}
 
-    .then(function ({ username, color }) {
+
 
         axios.get(`https://api.github.com/users/${username}`)
-            .then(function (res) {xx
+            .then(function (res) {
+                xx
 
                 const picture = res.data.avatar_url;
                 const name = res.data.name;

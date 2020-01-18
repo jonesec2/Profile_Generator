@@ -61,3 +61,25 @@ const displayName = /*html*/ `
     }
 
 })();
+
+const picture = res.data.avatar_url;
+const name = res.data.name;
+const location = res.data.location;
+const gitHub = res.data.html_url;
+const blog = res.data.blog;
+const bio = res.data.bio;
+const repoNumber = res.data.public_repos;
+const followers = res.data.followers;
+const following = res.data.following;
+
+axios.get(`https://api.github.com/users/${username}/repos?per_page=100000`)
+    .then(function (res) {
+
+        // gets the number of stars for each repo
+        // condenses the array into a single total of stars
+        const stars = res.data.map(repo => repo.stargazers_count);
+        const starsTotal = stars.reduce((total, num) => total + num);
+        console.log(starsTotal)
+    })
+    .catch(function (error) {
+        console.log(error);
