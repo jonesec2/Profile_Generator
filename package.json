@@ -1,0 +1,30 @@
+{
+  "name": "command_line_profile_generator",
+  "version": "1.0.0",
+  "description": "Prompt a user for input about a gitHub account, and create a pdf from axios call using only the command line.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonesec2/Command_Line_Profile_Generator.git"
+  },
+  "keywords": [
+    "command",
+    "line",
+    "gitHub"
+  ],
+  "author": "Christian Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonesec2/Command_Line_Profile_Generator/issues"
+  },
+  "homepage": "https://github.com/jonesec2/Command_Line_Profile_Generator#readme",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.3",
+    "until": "^0.1.1"
+  }
+}

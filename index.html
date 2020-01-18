@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style></style>
+</head>
+
+<body>
+    <header class="header" style="background-color:${color};">
+        <img src="paris.jpg" alt="Paris" class="center">
+        <img src="${picture}" style="center">
+        <h1 style="text-align:center;">Centered Heading</h1>
+        <h3 style="text-align:center;">My name is ${Name}</h3>
+        <p style="text-align:center;">
+            <a href="https://www.google.com/maps/place/${location.split(' ').join(',%20')}"
+                class='location fa-fal-icon'>${location}</a>
+            <a href='${github}'>gitHub</a>
+            <a href="${blog}" class='location fa-fal-icon'>Blog</a>
+        </p>
+    </header>
+    <hr>
+    <div class="bio" style="text-align: center;">${bio}</div>
+    <br>
+    <div class="body" style="background-color: ${color};">
+        <div></div>
+        <div></div>
+    </div>
+
+
+
+</body>
+
+</html>
